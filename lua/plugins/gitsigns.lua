@@ -45,6 +45,8 @@ return {
         map("n", "<leader>hb", gs.blame_line)
       end,
     })
+
+    -- :DiffWith <ref>
     vim.api.nvim_create_user_command("DiffWith", function(opts)
       local ref = opts.args or "HEAD"
       require("gitsigns").diffthis(ref)
@@ -54,5 +56,10 @@ return {
         return { "HEAD", "HEAD~1", "origin/main" }
       end,
     })
+
+    -- :DiffWithClear
+    vim.api.nvim_create_user_command("DiffWithClear", function()
+      vim.cmd("diffoff")
+    end, {})
   end,
 }
