@@ -20,7 +20,7 @@ return {
         show_hidden_count = true,
         hide_dotfiles = false,
         hide_gitignored = false,
-        auto_expand_width = false,
+        auto_expand_width = true,
       },
     },
   },
