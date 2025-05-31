@@ -8,4 +8,4 @@ vim.opt.listchars = current_listchars
 vim.opt.list = true
 
 -- nvim-tree
-vim.keymap.set("n", "e", ":Neotree<CR>")
+vim.keymap.set("n", "e", ":NvimTreeOpen<CR>")
