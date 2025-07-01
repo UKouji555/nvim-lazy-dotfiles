@@ -1,4 +1,4 @@
--- クリップボードの設定
+-- clipboard setting
 vim.opt.clipboard:append("unnamedplus")
 
 vim.opt.number = true
@@ -9,3 +9,7 @@ vim.opt.list = true
 
 -- nvim-tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeOpen<CR>")
+
+-- access history setting
+--vim.keymap.set("n", "@h", ":Telescope oldfiles<CR>")
+vim.keymap.set("n", "]h", "<Cmd>ShowHistory<CR>", { noremap = true, silent = true })
