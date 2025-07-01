@@ -44,10 +44,6 @@ local function show_history_popup()
     end
   end, 30)
 
-  vim.keymap.set("n", "<Esc>", function()
-    popup:unmount()
-  end, { buffer = popup.bufnr, noremap = true, silent = true })
-
   vim.keymap.set("n", "<CR>", function()
     local linenr = vim.api.nvim_win_get_cursor(0)[1]
     local selected_path = files[linenr]
@@ -62,6 +58,10 @@ local function show_history_popup()
   popup:on({ event.BufLeave, event.WinLeave }, function()
     popup:unmount()
   end)
+
+  vim.keymap.set("n", "<Esc>", function()
+    popup:unmount()
+  end, { buffer = popup.bufnr, noremap = true, silent = true })
 end
 
 vim.api.nvim_create_user_command("ShowHistory", show_history_popup, {})
