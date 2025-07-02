@@ -1,12 +1,43 @@
 local Popup = require("nui.popup")
 local event = require("nui.utils.autocmd").event
 
+_G.access_history = _G.access_history or {}
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  callback = function(args)
+    local path = vim.fn.expand(args.file)
+    if
+      vim.fn.filereadable(path) == 1
+      and not string.match(path, "^/tmp/")
+      and not string.match(path, "%.git/")
+      and not string.match(path, "fugitive://")
+    then
+      path = vim.fn.fnamemodify(path, ":p")
+
+      table.insert(_G.access_history, 1, path)
+
+      local seen = {}
+      _G.access_history = vim.tbl_filter(function(f)
+        if seen[f] then
+          return false
+        end
+        seen[f] = true
+        return true
+      end, _G.access_history)
+
+      -- 上限15件に制限
+      _G.access_history = vim.list_slice(_G.access_history, 1, 15)
+    end
+  end,
+})
+
 local function show_history_popup()
   vim.cmd("silent! rshada")
-  local files = vim.v.oldfiles
+  local files = _G.access_history or {}
+
   local list = vim.tbl_map(function(f)
     return vim.fn.fnamemodify(f, ":~")
-  end, vim.list_slice(vim.fn.reverse(files), 1, 10))
+  end, vim.list_slice(files, 1, 15))
 
   if #list == 0 then
     vim.notify("Not history", vim.log.levels.INFO)
