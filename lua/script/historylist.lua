@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         return true
       end, _G.access_history)
 
-      -- 上限15件に制限
       _G.access_history = vim.list_slice(_G.access_history, 1, 15)
     end
   end,
