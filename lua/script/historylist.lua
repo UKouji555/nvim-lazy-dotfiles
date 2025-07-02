@@ -6,7 +6,7 @@ local function show_history_popup()
   local files = vim.v.oldfiles
   local list = vim.tbl_map(function(f)
     return vim.fn.fnamemodify(f, ":~")
-  end, vim.list_slice(files, 1, 10))
+  end, vim.list_slice(vim.fn.reverse(files), 1, 10))
 
   if #list == 0 then
     vim.notify("Not history", vim.log.levels.INFO)
