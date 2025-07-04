@@ -31,7 +31,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 local function show_history_popup()
-  vim.cmd("silent! rshada")
   local files = _G.access_history or {}
 
   local list = vim.tbl_map(function(f)
