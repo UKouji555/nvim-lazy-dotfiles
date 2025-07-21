@@ -2,7 +2,9 @@ local M = {}
 
 function M.eval(env_path)
   local file = io.open(env_path, "r")
-  if not file then return end
+  if not file then
+    return
+  end
   for line in file:lines() do
     local key, value = line:match("^([%w_]+)%s*=%s*(.+)$")
     if key and value then
@@ -13,4 +15,3 @@ function M.eval(env_path)
 end
 
 return M
-

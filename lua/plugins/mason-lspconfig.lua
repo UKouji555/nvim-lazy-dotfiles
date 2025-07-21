@@ -34,9 +34,10 @@ return {
     })
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = { "lua_ls", "ts_ls" },
+      ensure_installed = { "lua_ls", "ts_ls", "kotlin_language_server" },
     })
     require("lspconfig").lua_ls.setup({})
     require("lspconfig").ts_ls.setup({})
+    require("lspconfig").kotlin_language_server.setup({})
   end,
 }

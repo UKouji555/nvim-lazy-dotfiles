@@ -2,8 +2,7 @@ return {
   "sindrets/diffview.nvim",
   dependencies = "nvim-lua/plenary.nvim",
   config = function()
-    require("diffview").setup({
-    })
+    require("diffview").setup({})
   end,
   cmd = {
     "DiffviewOpen",
